@@ -29,7 +29,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Heading One",
     family: "Montserrat/SemiBold",
-    size: "64px / 80px / 0%",
+    size: "4rem / 5rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-semibold",
@@ -41,7 +41,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Heading Two",
     family: "Montserrat/SemiBold",
-    size: "48px / 56px / 0%",
+    size: "3rem / 3.5rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-semibold",
@@ -53,7 +53,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Heading Three",
     family: "Montserrat/SemiBold",
-    size: "32px / 40px / 0%",
+    size: "2rem / 2.5rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-semibold",
@@ -65,7 +65,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Heading Four",
     family: "Montserrat/Bold",
-    size: "24px / 32px / 0%",
+    size: "1.5rem / 2rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-bold",
@@ -77,7 +77,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Heading Five",
     family: "Montserrat/Bold",
-    size: "20px / 24px / 0%",
+    size: "1.25rem / 1.5rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-bold",
@@ -89,7 +89,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Heading six",
     family: "Montserrat/Bold",
-    size: "16px / 24px / 0%",
+    size: "1rem / 1.5rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-bold",
@@ -101,7 +101,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Body - Large",
     family: "Montserrat/Regular",
-    size: "20px / 32px / 0%",
+    size: "1.25rem / 2rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-regular",
@@ -113,7 +113,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Body - Regular",
     family: "Montserrat/Regular",
-    size: "16px / 24px / 0%",
+    size: "1rem / 1.5rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-regular",
@@ -125,7 +125,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Body - Small",
     family: "Montserrat/Regular",
-    size: "14px / 24px / 0%",
+    size: "0.875rem / 1.5rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-regular",
@@ -137,7 +137,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Body - Extra Small",
     family: "Montserrat/Regular",
-    size: "12px / 24px / 0%",
+    size: "0.75rem / 1.5rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-regular",
@@ -149,7 +149,7 @@ export const typographyStyles: TypographyStyle[] = [
   {
     name: "Caption",
     family: "Montserrat/Regular",
-    size: "14px / 16px / 0%",
+    size: "0.875rem / 1rem / 0%",
     variables: {
       fontFamily: "--ds-font-family-base",
       fontWeight: "--ds-font-weight-regular",

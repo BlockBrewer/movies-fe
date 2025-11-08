@@ -65,7 +65,7 @@ export default function MoviesPage() {
               ? Array.from({ length: PAGE_SIZE }).map((_, index) => (
                   <div
                     key={`placeholder-${index}`}
-                    className="w-[282px] h-[470px] rounded-2xl animate-pulse opacity-70 bg-[var(--ds-color-surface)]"
+                    className="w-[var(--ds-card-width)] h-[var(--ds-card-height)] rounded-2xl animate-pulse opacity-70 bg-[var(--ds-color-surface)]"
                   />
                 ))
               : paginatedMovies.map((movie) => (
