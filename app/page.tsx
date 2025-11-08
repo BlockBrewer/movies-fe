@@ -31,12 +31,7 @@ export default function SignInPage() {
                 placeholder="Email"
                 value={state.credentials.email}
                 onChange={(event) => updateEmail(event.target.value)}
-                className="w-full px-6 py-4 bg-[var(--ds-color-input)] text-[var(--ds-color-text)] placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
-                style={{
-                  backgroundColor: "var(--ds-color-input)",
-                  WebkitBoxShadow: "0 0 0 1000px var(--ds-color-input) inset",
-                  boxShadow: "0 0 0 1000px var(--ds-color-input) inset",
-                }}
+                className="ds-input w-full px-6 py-4 bg-[var(--ds-color-input)] text-[var(--ds-color-text)] placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
               />
 
               <input
@@ -45,12 +40,7 @@ export default function SignInPage() {
                 placeholder="Password"
                 value={state.credentials.password}
                 onChange={(event) => updatePassword(event.target.value)}
-                className="w-full px-6 py-4 bg-[var(--ds-color-input)] text-[var(--ds-color-text)] placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
-                style={{
-                  backgroundColor: "var(--ds-color-input)",
-                  WebkitBoxShadow: "0 0 0 1000px var(--ds-color-input) inset",
-                  boxShadow: "0 0 0 1000px var(--ds-color-input) inset",
-                }}
+                className="ds-input w-full px-6 py-4 bg-[var(--ds-color-input)] text-[var(--ds-color-text)] placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
               />
 
               <div className="flex items-center justify-center">
@@ -60,11 +50,7 @@ export default function SignInPage() {
                     id="remember"
                     checked={state.credentials.rememberMe}
                     onChange={(event) => toggleRememberMe(event.target.checked)}
-                    className="w-5 h-5 rounded cursor-pointer appearance-none checked:bg-[var(--ds-color-input)]"
-                    style={{
-                      backgroundColor: "var(--ds-color-input)",
-                      background: "var(--ds-color-input)",
-                    }}
+                    className="ds-checkbox w-5 h-5 rounded cursor-pointer appearance-none checked:bg-[var(--ds-color-input)]"
                   />
                   {state.credentials.rememberMe && (
                     <Check className="absolute top-0 left-0 w-5 h-5 pointer-events-none text-[var(--ds-color-primary)] stroke-[3]" />

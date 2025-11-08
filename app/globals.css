@@ -243,3 +243,61 @@
     background: var(--ds-color-input) !important;
   }
 }
+
+@layer components {
+  .ds-input {
+    background-color: var(--ds-color-input);
+    color: var(--ds-color-text);
+    box-shadow: 0 0 0 1000px var(--ds-color-input) inset;
+    -webkit-box-shadow: 0 0 0 1000px var(--ds-color-input) inset;
+  }
+
+  .ds-checkbox {
+    background-color: var(--ds-color-input);
+    background: var(--ds-color-input);
+    color: var(--ds-color-text);
+  }
+
+  .ds-form-field {
+    background-color: color-mix(in srgb, var(--ds-color-surface-accent) 70%, transparent);
+    color: var(--ds-color-text);
+  }
+
+  .ds-dropzone {
+    border-color: color-mix(in srgb, var(--ds-color-text) 35%, transparent);
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  .ds-dropzone:hover {
+    border-color: var(--ds-color-primary);
+  }
+
+  .ds-link-secondary {
+    border-color: var(--ds-color-primary);
+    color: var(--ds-color-primary);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  .ds-link-secondary:hover {
+    background-color: var(--ds-color-primary);
+    color: var(--ds-color-background);
+  }
+
+  .ds-button-primary {
+    background-color: var(--ds-color-primary);
+    color: var(--ds-color-text);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  .ds-button-primary:hover {
+    background-color: var(--ds-color-primary-hover);
+  }
+
+  .ds-wave-primary {
+    fill: color-mix(in srgb, var(--ds-color-surface) 60%, transparent);
+  }
+
+  .ds-wave-secondary {
+    fill: color-mix(in srgb, var(--ds-color-surface-accent) 50%, transparent);
+  }
+}
