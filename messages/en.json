@@ -1,0 +1,82 @@
+{
+  "auth": {
+    "signIn": {
+      "title": "Sign in",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "loginButton": "Login",
+      "signingIn": "Signing in...",
+      "emailPasswordRequired": "Please enter both email and password",
+      "loginFailed": "Login failed",
+      "unexpectedError": "An unexpected error occurred"
+    },
+    "logout": {
+      "button": "Logout",
+      "title": "Logged out",
+      "description": "You have been successfully logged out.",
+      "failed": "Logout failed"
+    }
+  },
+  "movies": {
+    "list": {
+      "title": "My movies",
+      "welcomeBack": "Welcome back!",
+      "loggedInAs": "Logged in as {email}",
+      "prev": "Prev",
+      "next": "Next",
+      "empty": {
+        "title": "Your movie list is empty",
+        "addButton": "Add a new movie"
+      }
+    },
+    "form": {
+      "create": {
+        "title": "Create a new movie",
+        "submitButton": "Submit"
+      },
+      "edit": {
+        "title": "Edit",
+        "submitButton": "Update"
+      },
+      "fields": {
+        "title": "Title",
+        "publishingYear": "Publishing year",
+        "dropImage": "Drop an image here",
+        "dropOtherImage": "Drop other image here",
+        "cancel": "Cancel",
+        "uploadedImage": "Uploaded image"
+      }
+    },
+    "toast": {
+      "created": {
+        "title": "Movie created",
+        "description": "\"{title}\" has been added to your collection."
+      },
+      "createFailed": {
+        "title": "Failed to create movie",
+        "description": "An error occurred"
+      },
+      "updated": {
+        "title": "Movie updated",
+        "description": "\"{title}\" has been updated successfully."
+      },
+      "updateFailed": {
+        "title": "Failed to update movie",
+        "description": "An error occurred"
+      },
+      "deleted": {
+        "title": "Movie deleted",
+        "description": "\"{title}\" has been removed from your collection."
+      },
+      "deleteFailed": {
+        "title": "Failed to delete movie",
+        "description": "An error occurred"
+      },
+      "notFound": "Movie not found"
+    }
+  },
+  "common": {
+    "error": "An error occurred"
+  }
+}

@@ -8,7 +8,7 @@ const baseInputStyles =
 const focusInputStyles =
   'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive'
 
-const placeholderStyles = 'placeholder:text-[color:color-mix(in_srgb,var(--ds-color-text)_60%,transparent)]'
+const placeholderStyles = 'placeholder:text-white/60'
 
 const sizes = {
   sm: 'px-4 py-3 text-sm',

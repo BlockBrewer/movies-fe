@@ -1,40 +1,68 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
-import { Plus, LogOut } from "lucide-react"
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { Plus, LogOut } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { AuthLayout } from "@/components/auth-layout"
-import { MovieCard } from "@/components/movie-card"
-import { useMovieList } from "@/hooks/use-movie-list"
+import { AuthLayout } from "@/components/auth-layout";
+import { MovieCard } from "@/components/movie-card";
+import { useApp } from "@/components/providers/app-provider";
+import { useMovieList } from "@/hooks/use-movie-list";
+import { toast } from "@/hooks/use-toast";
 
-const PAGE_SIZE = 8
+const PAGE_SIZE = 8;
 
 export default function MoviesPage() {
-  const [currentPage, setCurrentPage] = useState(1)
-  const { movies, isLoading } = useMovieList()
+  const t = useTranslations("movies.list");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasShownWelcome, setHasShownWelcome] = useState(false);
+  const { movies, isLoading } = useMovieList();
+  const { user, signOut } = useApp();
+  const router = useRouter();
 
   const paginatedMovies = useMemo(() => {
-    const start = (currentPage - 1) * PAGE_SIZE
-    return movies.slice(start, start + PAGE_SIZE)
-  }, [currentPage, movies])
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return movies.slice(start, start + PAGE_SIZE);
+  }, [currentPage, movies]);
 
-  const totalPages = Math.max(Math.ceil(movies.length / PAGE_SIZE), 1)
-  const canGoPrev = currentPage > 1
-  const canGoNext = currentPage < totalPages
+  const totalPages = Math.max(Math.ceil(movies.length / PAGE_SIZE), 1);
+  const canGoPrev = currentPage > 1;
+  const canGoNext = currentPage < totalPages;
 
-  const handleLogout = () => {
-    console.log("User logged out")
+  useEffect(() => {
+    if (user && !hasShownWelcome) {
+      const justLoggedIn = sessionStorage.getItem("justLoggedIn");
+      if (justLoggedIn === "true") {
+        toast({
+          title: t("welcomeBack"),
+          description: t("loggedInAs", { email: user.email }),
+          variant: "default",
+        });
+        sessionStorage.removeItem("justLoggedIn");
+      }
+      setHasShownWelcome(true);
+    }
+  }, [user, hasShownWelcome, t]);
+
+  if (!user) {
+    return null;
   }
+
+  const handleLogout = async () => {
+    await signOut();
+  };
 
   const handlePrev = () => {
-    if (!canGoPrev) return
-    setCurrentPage((prev) => Math.max(prev - 1, 1))
-  }
+    if (!canGoPrev) return;
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
 
   const handleNext = () => {
-    if (!canGoNext) return
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-  }
+    if (!canGoNext) return;
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
 
   return (
     <AuthLayout>
@@ -42,16 +70,23 @@ export default function MoviesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <h1 className="text-4xl font-bold text-white leading-none">My movies</h1>
-              <button className="w-5 h-5 rounded-full border-2 border-white text-white hover:text-gray-200 hover:border-gray-200 transition flex items-center justify-center -mt-1">
+              <h1 className="text-4xl font-bold text-white leading-none">
+                {t("title")}
+              </h1>
+              <button
+                type="button"
+                onClick={() => router.push("/movies/manage")}
+                className="w-5 h-5 rounded-full border-2 border-white text-white transition flex items-center justify-center -mt-1 hover:border-gray-200 hover:text-gray-200"
+              >
                 <Plus className="w-3.5 h-3.5 stroke-[3]" />
               </button>
             </div>
             <button
+              type="button"
               onClick={handleLogout}
-              className="flex items-center gap-2 text-white hover:text-gray-200 transition font-medium"
+              className="flex items-center gap-2 text-white transition font-medium hover:text-gray-200"
             >
-              Logout
+              {t("../logout.button")}
               <LogOut className="w-5 h-5" />
             </button>
           </div>
@@ -69,7 +104,17 @@ export default function MoviesPage() {
                   />
                 ))
               : paginatedMovies.map((movie) => (
-                  <MovieCard key={movie.id} title={movie.title} year={movie.year} image={movie.image} />
+                  <Link
+                    key={movie.id}
+                    href={`/movies/manage?id=${movie.id}`}
+                    className="block rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ds-color-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900/60"
+                  >
+                    <MovieCard
+                      title={movie.title}
+                      year={movie.year}
+                      image={movie.image}
+                    />
+                  </Link>
                 ))}
           </div>
 
@@ -79,11 +124,11 @@ export default function MoviesPage() {
               disabled={!canGoPrev}
               className="text-white hover:text-gray-200 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Prev
+              {t("prev")}
             </button>
             {Array.from({ length: totalPages }).map((_, index) => {
-              const pageNumber = index + 1
-              const isActive = pageNumber === currentPage
+              const pageNumber = index + 1;
+              const isActive = pageNumber === currentPage;
               return (
                 <button
                   key={pageNumber}
@@ -96,18 +141,18 @@ export default function MoviesPage() {
                 >
                   {pageNumber}
                 </button>
-              )
+              );
             })}
             <button
               onClick={handleNext}
               disabled={!canGoNext}
               className="text-white hover:text-gray-200 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Next
+              {t("next")}
             </button>
           </div>
         </div>
       </div>
     </AuthLayout>
-  )
+  );
 }

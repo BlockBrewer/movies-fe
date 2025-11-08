@@ -1,87 +1,108 @@
-import type { FormEvent } from 'react'
-import { useCallback, useMemo, useState } from 'react'
+import type { FormEvent } from "react";
+import { useCallback, useMemo, useState } from "react";
 
-import type { AuthService } from '@/lib/auth/auth-service'
-import { mockAuthService } from '@/lib/auth/mock-auth-service'
-import type { SignInCredentials } from '@/lib/auth/types'
+import type { AuthService } from "@/lib/auth/auth-service";
+import type { SignInCredentials } from "@/lib/auth/types";
 
 interface UseSignInFormOptions {
-  service?: AuthService
+  service: AuthService;
+  onSuccess?: (credentials: SignInCredentials) => void;
 }
 
 interface SignInState {
-  credentials: SignInCredentials
-  isSubmitting: boolean
-  error?: string
+  credentials: SignInCredentials;
+  isSubmitting: boolean;
+  error?: string;
 }
 
 const initialState: SignInState = {
   credentials: {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     rememberMe: false,
   },
   isSubmitting: false,
-}
+};
 
-export function useSignInForm(options: UseSignInFormOptions = {}) {
-  const authService = options.service ?? mockAuthService
-  const [state, setState] = useState<SignInState>(initialState)
+export function useSignInForm(options: UseSignInFormOptions) {
+  const { service: authService, onSuccess } = options;
+  const [state, setState] = useState<SignInState>(initialState);
 
-  const updateCredentials = useCallback(<K extends keyof SignInCredentials>(key: K, value: SignInCredentials[K]) => {
-    setState((prev) => ({
-      ...prev,
-      credentials: {
-        ...prev.credentials,
-        [key]: value,
-      },
-    }))
-  }, [])
+  const updateCredentials = useCallback(
+    <K extends keyof SignInCredentials>(
+      key: K,
+      value: SignInCredentials[K]
+    ) => {
+      setState((prev) => ({
+        ...prev,
+        credentials: {
+          ...prev.credentials,
+          [key]: value,
+        },
+      }));
+    },
+    []
+  );
 
   const reset = useCallback(() => {
-    setState(initialState)
-  }, [])
+    setState(initialState);
+  }, []);
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault()
+      setState((prev) => ({ ...prev, isSubmitting: true, error: undefined }));
 
-      setState((prev) => ({ ...prev, isSubmitting: true, error: undefined }))
+      try {
+        const result = await authService.signIn(state.credentials);
 
-      const result = await authService.signIn(state.credentials)
+        if (!result.success) {
+          setState((prev) => ({
+            ...prev,
+            isSubmitting: false,
+            error: result.message ?? "Unable to sign in",
+          }));
+          return;
+        }
 
-      if (!result.success) {
+        onSuccess?.(state.credentials);
         setState((prev) => ({
           ...prev,
           isSubmitting: false,
-          error: result.message ?? 'Unable to sign in',
-        }))
-        return
-      }
+          error: undefined,
+        }));
 
-      setState((prev) => ({ ...prev, isSubmitting: false, error: undefined }))
-
-      if (!state.credentials.rememberMe) {
-        reset()
+        if (!state.credentials.rememberMe) {
+          reset();
+        }
+      } catch (error) {
+        setState((prev) => ({
+          ...prev,
+          isSubmitting: false,
+          error:
+            error instanceof Error
+              ? error.message
+              : "An unexpected error occurred",
+        }));
       }
     },
-    [authService, reset, state.credentials],
-  )
+    [authService, onSuccess, reset, state.credentials]
+  );
 
   const handlers = useMemo(
     () => ({
       handleSubmit,
-      updateEmail: (email: string) => updateCredentials('email', email),
-      updatePassword: (password: string) => updateCredentials('password', password),
-      toggleRememberMe: (rememberMe: boolean) => updateCredentials('rememberMe', rememberMe),
+      updateEmail: (email: string) => updateCredentials("email", email),
+      updatePassword: (password: string) =>
+        updateCredentials("password", password),
+      toggleRememberMe: (rememberMe: boolean) =>
+        updateCredentials("rememberMe", rememberMe),
       reset,
     }),
-    [handleSubmit, reset, updateCredentials],
-  )
+    [handleSubmit, reset, updateCredentials]
+  );
 
   return {
     state,
     ...handlers,
-  }
+  };
 }
-

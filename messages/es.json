@@ -1,0 +1,82 @@
+{
+  "auth": {
+    "signIn": {
+      "title": "Iniciar sesión",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "rememberMe": "Recuérdame",
+      "loginButton": "Iniciar sesión",
+      "signingIn": "Iniciando sesión...",
+      "emailPasswordRequired": "Por favor ingrese el correo electrónico y la contraseña",
+      "loginFailed": "Error al iniciar sesión",
+      "unexpectedError": "Ocurrió un error inesperado"
+    },
+    "logout": {
+      "button": "Cerrar sesión",
+      "title": "Sesión cerrada",
+      "description": "Ha cerrado sesión exitosamente.",
+      "failed": "Error al cerrar sesión"
+    }
+  },
+  "movies": {
+    "list": {
+      "title": "Mis películas",
+      "welcomeBack": "¡Bienvenido de nuevo!",
+      "loggedInAs": "Sesión iniciada como {email}",
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "empty": {
+        "title": "Tu lista de películas está vacía",
+        "addButton": "Agregar una nueva película"
+      }
+    },
+    "form": {
+      "create": {
+        "title": "Crear una nueva película",
+        "submitButton": "Enviar"
+      },
+      "edit": {
+        "title": "Editar",
+        "submitButton": "Actualizar"
+      },
+      "fields": {
+        "title": "Título",
+        "publishingYear": "Año de publicación",
+        "dropImage": "Suelta una imagen aquí",
+        "dropOtherImage": "Suelta otra imagen aquí",
+        "cancel": "Cancelar",
+        "uploadedImage": "Imagen subida"
+      }
+    },
+    "toast": {
+      "created": {
+        "title": "Película creada",
+        "description": "\"{title}\" ha sido agregada a tu colección."
+      },
+      "createFailed": {
+        "title": "Error al crear la película",
+        "description": "Ocurrió un error"
+      },
+      "updated": {
+        "title": "Película actualizada",
+        "description": "\"{title}\" ha sido actualizada exitosamente."
+      },
+      "updateFailed": {
+        "title": "Error al actualizar la película",
+        "description": "Ocurrió un error"
+      },
+      "deleted": {
+        "title": "Película eliminada",
+        "description": "\"{title}\" ha sido eliminada de tu colección."
+      },
+      "deleteFailed": {
+        "title": "Error al eliminar la película",
+        "description": "Ocurrió un error"
+      },
+      "notFound": "Película no encontrada"
+    }
+  },
+  "common": {
+    "error": "Ocurrió un error"
+  }
+}

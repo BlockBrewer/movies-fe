@@ -1,17 +1,12 @@
-"use client"
+import { redirect } from "next/navigation"
 
-import { AuthLayout } from "@/components/auth-layout"
-import { MovieForm } from "@/components/movie-form"
-import type { MovieFormValues } from "@/hooks/use-movie-form"
+interface EditPageProps {
+  searchParams?: Record<string, string | string[] | undefined>
+}
 
-export default function EditMoviePage() {
-  const handleUpdate = async (values: MovieFormValues) => {
-    console.log("Updating movie:", values)
-  }
-
-  return (
-    <AuthLayout>
-      <MovieForm title="Edit" submitLabel="Update" cancelHref="/movies" onSubmit={handleUpdate} />
-    </AuthLayout>
-  )
+export default function LegacyEditMoviePage({ searchParams }: EditPageProps) {
+  const idParam = searchParams?.id
+  const id = Array.isArray(idParam) ? idParam[0] : idParam
+  const suffix = id ? `?id=${id}` : ""
+  redirect(`/movies/manage${suffix}`)
 }

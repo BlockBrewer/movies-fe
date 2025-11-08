@@ -104,6 +104,8 @@
   --ds-card-width: 17.625rem;
   --ds-card-height: 29.375rem;
   --ds-card-image-height: 23.625rem;
+  --ds-form-preview-width: var(--ds-card-width);
+  --ds-form-preview-height: var(--ds-card-image-height);
 }
 
 .dark {

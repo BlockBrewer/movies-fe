@@ -2,7 +2,7 @@ import type { RefObject } from 'react'
 import { useEffect } from 'react'
 
 export function useAutofillBackground(
-  refs: Array<RefObject<HTMLInputElement>>,
+  refs: Array<RefObject<HTMLInputElement | null>>,
   options: { color?: string } = {},
 ) {
   const { color = 'var(--ds-color-input)' } = options
