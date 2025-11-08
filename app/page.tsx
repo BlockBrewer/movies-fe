@@ -5,9 +5,10 @@ import { useMemo, useRef } from "react"
 import { Check } from "lucide-react"
 
 import { AuthLayout } from "@/components/auth-layout"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { useAutofillBackground } from "@/hooks/use-autofill-background"
 import { useSignInForm } from "@/hooks/use-sign-in-form"
-import { Button } from "@/components/ui/button"
 
 export default function SignInPage() {
   const emailRef = useRef<HTMLInputElement>(null)
@@ -26,22 +27,22 @@ export default function SignInPage() {
             <h1 className="text-6xl font-bold text-white mb-12">Sign in</h1>
 
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-              <input
+              <Input
                 ref={emailRef}
                 type="email"
                 placeholder="Email"
                 value={state.credentials.email}
                 onChange={(event) => updateEmail(event.target.value)}
-                className="ds-input w-full px-6 py-4 bg-[var(--ds-color-input)] text-[var(--ds-color-text)] placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
+                className="placeholder-gray-300"
               />
 
-              <input
+              <Input
                 ref={passwordRef}
                 type="password"
                 placeholder="Password"
                 value={state.credentials.password}
                 onChange={(event) => updatePassword(event.target.value)}
-                className="ds-input w-full px-6 py-4 bg-[var(--ds-color-input)] text-[var(--ds-color-text)] placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
+                className="placeholder-gray-300"
               />
 
               <div className="flex items-center justify-center">

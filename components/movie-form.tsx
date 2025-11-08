@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { useMovieForm, type MovieFormValues } from "@/hooks/use-movie-form"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 interface MovieFormProps {
   title: string
@@ -47,22 +48,20 @@ export function MovieForm({ title, submitLabel, cancelHref, onSubmit, initialVal
 
             <div className="space-y-6">
               <div>
-                <input
-                  type="text"
+                <Input
                   placeholder="Title"
                   value={values.title}
                   onChange={(event) => updateTitle(event.target.value)}
-                  className="ds-form-field w-full px-4 sm:px-6 py-3 sm:py-4 placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
+                  className="ds-form-field placeholder-gray-400"
                 />
               </div>
 
               <div>
-                <input
-                  type="text"
+                <Input
                   placeholder="Publishing year"
                   value={values.year}
                   onChange={(event) => updateYear(event.target.value)}
-                  className="ds-form-field w-full px-4 sm:px-6 py-3 sm:py-4 placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
+                  className="ds-form-field placeholder-gray-400"
                 />
               </div>
 
