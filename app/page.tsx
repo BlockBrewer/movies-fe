@@ -7,6 +7,7 @@ import { Check } from "lucide-react"
 import { AuthLayout } from "@/components/auth-layout"
 import { useAutofillBackground } from "@/hooks/use-autofill-background"
 import { useSignInForm } from "@/hooks/use-sign-in-form"
+import { Button } from "@/components/ui/button"
 
 export default function SignInPage() {
   const emailRef = useRef<HTMLInputElement>(null)
@@ -61,13 +62,9 @@ export default function SignInPage() {
                 </label>
               </div>
 
-              <button
-                type="submit"
-                disabled={state.isSubmitting}
-                className="w-full px-6 py-4 bg-[var(--ds-color-primary)] hover:bg-[var(--ds-color-primary-hover)] text-[var(--ds-color-text)] font-bold text-lg rounded-lg transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
-              >
+              <Button type="submit" size="form" disabled={state.isSubmitting} className="w-full font-bold">
                 {state.isSubmitting ? "Signing in..." : "Login"}
-              </button>
+              </Button>
 
               {state.error ? <p className="text-sm text-red-300">{state.error}</p> : null}
             </form>

@@ -2,6 +2,7 @@ import type { ChangeEvent, FormEvent } from "react"
 import Link from "next/link"
 
 import { useMovieForm, type MovieFormValues } from "@/hooks/use-movie-form"
+import { Button } from "@/components/ui/button"
 
 interface MovieFormProps {
   title: string
@@ -65,19 +66,13 @@ export function MovieForm({ title, submitLabel, cancelHref, onSubmit, initialVal
                 />
               </div>
 
-            <div className="flex gap-3 sm:gap-4 pt-4">
-                <Link
-                  href={cancelHref}
-                  className="ds-link-secondary flex-1 px-4 sm:px-6 py-3 sm:py-4 border-2 font-bold rounded-lg transition text-center"
-                >
-                Cancel
-              </Link>
-              <button
-                type="submit"
-                  className="ds-button-primary flex-1 px-4 sm:px-6 py-3 sm:py-4 font-bold rounded-lg transition"
-              >
-                {submitLabel}
-              </button>
+              <div className="flex gap-3 sm:gap-4 pt-4">
+                <Button asChild variant="outline" size="form" className="flex-1">
+                  <Link href={cancelHref}>Cancel</Link>
+                </Button>
+                <Button type="submit" size="form" className="flex-1">
+                  {submitLabel}
+                </Button>
             </div>
           </div>
         </form>
