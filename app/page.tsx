@@ -31,11 +31,11 @@ export default function SignInPage() {
                 placeholder="Email"
                 value={state.credentials.email}
                 onChange={(event) => updateEmail(event.target.value)}
-                className="w-full px-6 py-4 bg-[#224957] text-white placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2BD17E] transition"
+                className="w-full px-6 py-4 bg-[var(--ds-color-input)] text-[var(--ds-color-text)] placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
                 style={{
-                  backgroundColor: "#224957",
-                  WebkitBoxShadow: "0 0 0 1000px #224957 inset",
-                  boxShadow: "0 0 0 1000px #224957 inset",
+                  backgroundColor: "var(--ds-color-input)",
+                  WebkitBoxShadow: "0 0 0 1000px var(--ds-color-input) inset",
+                  boxShadow: "0 0 0 1000px var(--ds-color-input) inset",
                 }}
               />
 
@@ -45,11 +45,11 @@ export default function SignInPage() {
                 placeholder="Password"
                 value={state.credentials.password}
                 onChange={(event) => updatePassword(event.target.value)}
-                className="w-full px-6 py-4 bg-[#224957] text-white placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2BD17E] transition"
+                className="w-full px-6 py-4 bg-[var(--ds-color-input)] text-[var(--ds-color-text)] placeholder-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--ds-color-primary)] transition"
                 style={{
-                  backgroundColor: "#224957",
-                  WebkitBoxShadow: "0 0 0 1000px #224957 inset",
-                  boxShadow: "0 0 0 1000px #224957 inset",
+                  backgroundColor: "var(--ds-color-input)",
+                  WebkitBoxShadow: "0 0 0 1000px var(--ds-color-input) inset",
+                  boxShadow: "0 0 0 1000px var(--ds-color-input) inset",
                 }}
               />
 
@@ -60,14 +60,14 @@ export default function SignInPage() {
                     id="remember"
                     checked={state.credentials.rememberMe}
                     onChange={(event) => toggleRememberMe(event.target.checked)}
-                    className="w-5 h-5 rounded cursor-pointer appearance-none checked:bg-[#224957]"
+                    className="w-5 h-5 rounded cursor-pointer appearance-none checked:bg-[var(--ds-color-input)]"
                     style={{
-                      backgroundColor: "#224957",
-                      background: "#224957",
+                      backgroundColor: "var(--ds-color-input)",
+                      background: "var(--ds-color-input)",
                     }}
                   />
                   {state.credentials.rememberMe && (
-                    <Check className="absolute top-0 left-0 w-5 h-5 pointer-events-none text-[#2BD17E] stroke-[3]" />
+                    <Check className="absolute top-0 left-0 w-5 h-5 pointer-events-none text-[var(--ds-color-primary)] stroke-[3]" />
                   )}
                 </div>
                 <label htmlFor="remember" className="ml-3 text-gray-200 cursor-pointer font-medium">
@@ -78,7 +78,7 @@ export default function SignInPage() {
               <button
                 type="submit"
                 disabled={state.isSubmitting}
-                className="w-full px-6 py-4 bg-[#2BD17E] hover:bg-[#24b870] text-white font-bold text-lg rounded-lg transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full px-6 py-4 bg-[var(--ds-color-primary)] hover:bg-[var(--ds-color-primary-hover)] text-[var(--ds-color-text)] font-bold text-lg rounded-lg transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {state.isSubmitting ? "Signing in..." : "Login"}
               </button>

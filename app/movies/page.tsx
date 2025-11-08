@@ -38,7 +38,7 @@ export default function MoviesPage() {
 
   return (
     <AuthLayout>
-      <div className="fixed inset-x-0 top-0 z-30 bg-gradient-to-b bg-[#093545]">
+      <div className="fixed inset-x-0 top-0 z-30 bg-gradient-to-b bg-[var(--ds-color-background)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -65,7 +65,8 @@ export default function MoviesPage() {
               ? Array.from({ length: PAGE_SIZE }).map((_, index) => (
                   <div
                     key={`placeholder-${index}`}
-                    className="w-[282px] h-[470px] rounded-2xl bg-[#092C39]/70 animate-pulse"
+                    className="w-[282px] h-[470px] rounded-2xl animate-pulse opacity-70"
+                    style={{ backgroundColor: "var(--ds-color-surface)" }}
                   />
                 ))
               : paginatedMovies.map((movie) => (
@@ -90,8 +91,8 @@ export default function MoviesPage() {
                   onClick={() => setCurrentPage(pageNumber)}
                   className={`w-10 h-10 rounded-lg transition font-bold ${
                     isActive
-                      ? "bg-[#2BD17E] text-white hover:bg-green-500"
-                      : "text-white hover:bg-teal-700 font-medium"
+                      ? "bg-[var(--ds-color-primary)] text-[var(--ds-color-text)] hover:bg-[var(--ds-color-primary-hover)]"
+                      : "text-[var(--ds-color-text)] hover:bg-[var(--ds-color-surface-accent)] font-medium"
                   }`}
                 >
                   {pageNumber}

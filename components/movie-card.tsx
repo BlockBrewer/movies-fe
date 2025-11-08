@@ -7,7 +7,7 @@ interface MovieCardProps {
 export function MovieCard({ title, year, image }: MovieCardProps) {
   return (
     <div className="flex flex-col group cursor-pointer">
-      <div className="w-[282px] h-[470px] rounded-2xl flex flex-col bg-[#092C39] shadow-lg overflow-hidden">
+      <div className="w-[282px] h-[470px] rounded-2xl flex flex-col bg-[var(--ds-color-surface)] shadow-lg overflow-hidden">
         <div className="h-[378px] w-full flex-shrink-0 p-2 pb-0">
           <div className="w-full h-full rounded-lg overflow-hidden">
             <img

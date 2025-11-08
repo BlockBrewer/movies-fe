@@ -6,7 +6,7 @@ interface AuthLayoutProps {
 
 export function AuthLayout({ children }: AuthLayoutProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#093545] via-[#093545] to-[#0a4a5f] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[var(--ds-color-background)] via-[var(--ds-color-background)] to-[var(--ds-color-surface-accent)] relative overflow-hidden">
       {/* Main Content */}
       <div className="relative z-10">{children}</div>
 
@@ -20,12 +20,12 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         >
           {/* First wave */}
           <path
-            fill="rgba(9, 44, 57, 0.6)"
+            style={{ fill: "color-mix(in srgb, var(--ds-color-surface) 60%, transparent)" }}
             d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           />
           {/* Second wave */}
           <path
-            fill="rgba(5, 30, 38, 0.5)"
+            style={{ fill: "color-mix(in srgb, var(--ds-color-surface-accent) 50%, transparent)" }}
             d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,192C960,203,1056,181,1152,160C1248,139,1344,128,1392,122.7L1440,117L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           />
         </svg>

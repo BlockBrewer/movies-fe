@@ -5,7 +5,7 @@ export function useAutofillBackground(
   refs: Array<RefObject<HTMLInputElement>>,
   options: { color?: string } = {},
 ) {
-  const { color = '#224957' } = options
+  const { color = 'var(--ds-color-input)' } = options
 
   useEffect(() => {
     const applyStyles = () => {

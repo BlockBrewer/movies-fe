@@ -1,14 +1,16 @@
 export interface ColorToken {
   name: string
-  className: string
+  variable: string
   hex: string
 }
 
 export const colorTokens: ColorToken[] = [
-  { name: "Primary", className: "bg-green-400", hex: "#2ECC71" },
-  { name: "Error", className: "bg-red-400", hex: "#FF6B6B" },
-  { name: "Background color", className: "bg-teal-700", hex: "#0F7478" },
-  { name: "Input color", className: "bg-teal-600", hex: "#1A8B96" },
-  { name: "Card color", className: "bg-teal-800", hex: "#0D5961" },
+  { name: "Primary", variable: "--ds-color-primary", hex: "#2BD17E" },
+  { name: "Primary Hover", variable: "--ds-color-primary-hover", hex: "#24B870" },
+  { name: "Background", variable: "--ds-color-background", hex: "#093545" },
+  { name: "Surface", variable: "--ds-color-surface", hex: "#092C39" },
+  { name: "Surface Accent", variable: "--ds-color-surface-accent", hex: "#0A4A5F" },
+  { name: "Input", variable: "--ds-color-input", hex: "#224957" },
+  { name: "Text", variable: "--ds-color-text", hex: "#FFFFFF" },
 ]
 
