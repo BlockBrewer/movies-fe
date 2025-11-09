@@ -4,10 +4,10 @@ frontend:
     preBuild:
       commands:
         - npm ci
-        - echo "NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}"
     build:
       commands:
-        - env | grep NEXT_PUBLIC
+        - env | grep NEXT_PUBLIC || echo "No NEXT_PUBLIC vars found"
+        - echo "Building with API URL - $NEXT_PUBLIC_API_BASE_URL"
         - npm run build
   artifacts:
     baseDirectory: .next
@@ -16,4 +16,3 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-      - .next/cache/**/*
