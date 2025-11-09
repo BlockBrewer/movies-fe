@@ -45,7 +45,7 @@ export default function MoviesPage() {
       }
       setHasShownWelcome(true);
     }
-  }, [user, hasShownWelcome, t]);
+  }, [user, hasShownWelcome, tMovies]);
 
   if (!user) {
     return null;
@@ -72,7 +72,7 @@ export default function MoviesPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <h1 className="text-4xl font-bold text-white leading-none">
-              {tMovies("title")}
+                {tMovies("title")}
               </h1>
               <button
                 type="button"
