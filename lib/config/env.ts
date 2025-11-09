@@ -8,7 +8,7 @@ interface EnvConfig {
 
 // Default to production URL, fallback to localhost for development
 const DEFAULT_API_URL = process.env.NODE_ENV === 'production' 
-  ? "http://movie-be-env.eba-mkpv9mkm.ap-southeast-1.elasticbeanstalk.com"
+  ? "https://api.movielist.shop"
   : "http://localhost:3025";
 
 function getEnvVar(key: string, defaultValue?: string): string {
