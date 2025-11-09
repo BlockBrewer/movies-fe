@@ -248,8 +248,6 @@ export function MovieForm({
               >
                 {errors.image}
               </p>
-            ) : existingImageLabel ? (
-              <p className="mt-2 text-sm text-white/60">{existingImageLabel}</p>
             ) : null}
             <input
               ref={fileInputRef}
