@@ -6,6 +6,11 @@ interface EnvConfig {
   };
 }
 
+// Default to production URL, fallback to localhost for development
+const DEFAULT_API_URL = process.env.NODE_ENV === 'production' 
+  ? "http://movie-be-env.eba-mkpv9mkm.ap-southeast-1.elasticbeanstalk.com"
+  : "http://localhost:3025";
+
 function getEnvVar(key: string, defaultValue?: string): string {
   const value = process.env[key] || defaultValue;
   if (!value) {
@@ -16,7 +21,7 @@ function getEnvVar(key: string, defaultValue?: string): string {
 
 export const env: EnvConfig = {
   api: {
-    baseUrl: getEnvVar("NEXT_PUBLIC_API_BASE_URL", "http://localhost:3025"),
+    baseUrl: getEnvVar("NEXT_PUBLIC_API_BASE_URL", DEFAULT_API_URL),
     version: getEnvVar("NEXT_PUBLIC_API_VERSION", "v1"),
     debug: getEnvVar("NEXT_PUBLIC_API_DEBUG", "false") === "true",
   },
