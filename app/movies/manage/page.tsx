@@ -82,6 +82,9 @@ function ManageMovieContent() {
         submitLabel={
           isEditing ? t("edit.submitButton") : t("create.submitButton")
         }
+        submittingLabel={
+          isEditing ? t("edit.submittingButton") : t("create.submittingButton")
+        }
         cancelHref="/movies"
         onSubmit={handleSubmit}
         variant={isEditing ? "edit" : "create"}

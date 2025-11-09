@@ -33,11 +33,13 @@
     "form": {
       "create": {
         "title": "Crear una nueva película",
-        "submitButton": "Enviar"
+        "submitButton": "Enviar",
+        "submittingButton": "Subiendo..."
       },
       "edit": {
         "title": "Editar",
-        "submitButton": "Actualizar"
+        "submitButton": "Actualizar",
+        "submittingButton": "Guardando..."
       },
       "fields": {
         "title": "Título",
@@ -46,6 +48,12 @@
         "dropOtherImage": "Suelta otra imagen aquí",
         "cancel": "Cancelar",
         "uploadedImage": "Imagen subida"
+      },
+      "validation": {
+        "titleRequired": "Por favor ingresa un título.",
+        "yearRequired": "Por favor ingresa el año de publicación.",
+        "yearInvalid": "Ingresa un año válido entre 1888 y {maxYear}.",
+        "imageRequired": "Por favor sube una imagen de la película."
       }
     },
     "toast": {

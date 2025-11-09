@@ -33,11 +33,13 @@
     "form": {
       "create": {
         "title": "Create a new movie",
-        "submitButton": "Submit"
+        "submitButton": "Submit",
+        "submittingButton": "Uploading..."
       },
       "edit": {
         "title": "Edit",
-        "submitButton": "Update"
+        "submitButton": "Update",
+        "submittingButton": "Saving..."
       },
       "fields": {
         "title": "Title",
@@ -46,6 +48,12 @@
         "dropOtherImage": "Drop other image here",
         "cancel": "Cancel",
         "uploadedImage": "Uploaded image"
+      },
+      "validation": {
+        "titleRequired": "Please enter a title.",
+        "yearRequired": "Please enter the publishing year.",
+        "yearInvalid": "Enter a valid year between 1888 and {maxYear}.",
+        "imageRequired": "Please upload a movie image."
       }
     },
     "toast": {
