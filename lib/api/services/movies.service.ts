@@ -5,13 +5,20 @@ import type {
   CreateMovieWithUploadRequest,
   UpdateMovieRequest,
   UploadPosterResponse,
+  PaginatedResponse,
+  PaginationQuery,
 } from "../types";
 
 class MoviesService {
   private readonly basePath = "/movies";
 
-  async getAll(): Promise<Movie[]> {
-    const response = await apiClient.get<Movie[]>(this.basePath);
+  async getAll(
+    query: PaginationQuery = {}
+  ): Promise<PaginatedResponse<Movie>> {
+    const response = await apiClient.get<PaginatedResponse<Movie>>(
+      this.basePath,
+      { params: query }
+    );
     return response.data;
   }
 

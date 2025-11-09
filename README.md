@@ -154,7 +154,8 @@ Example usage:
 import { useMovies, useCreateMovieWithUpload } from '@/lib/api/hooks';
 
 function MoviesPage() {
-  const { data: movies, isLoading } = useMovies();
+  const { data: moviesPage, isLoading } = useMovies({ page: 1, limit: 10 });
+  const movies = moviesPage?.data ?? [];
   const createMovie = useCreateMovieWithUpload();
 
   const handleCreate = async (file: File) => {

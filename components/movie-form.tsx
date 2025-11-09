@@ -150,7 +150,7 @@ export function MovieForm({
 
     setIsSubmitting(true);
     try {
-      await onSubmit(values);
+    await onSubmit(values);
     } finally {
       setIsSubmitting(false);
     }

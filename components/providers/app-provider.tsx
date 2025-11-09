@@ -7,6 +7,8 @@ import {
   useRef,
   useEffect,
   useCallback,
+  useMemo,
+  useState,
 } from "react";
 import { useTranslations } from "next-intl";
 import { useAuth } from "./auth-provider";
@@ -25,6 +27,7 @@ import type {
   Movie as ApiMovie,
   CreateMovieWithUploadRequest,
   UpdateMovieRequest,
+  PaginatedResponse,
 } from "@/lib/api/types";
 
 interface User {
@@ -37,11 +40,19 @@ interface MovieDraft {
   image: string;
 }
 
+const MOVIES_PAGE_SIZE = 8;
+
 interface AppContextValue {
   user: User | null;
   signIn: (credentials: SignInCredentials) => Promise<SignInResult>;
   signOut: () => Promise<void>;
   movies: OldMovie[];
+  moviesTotal: number;
+  moviesPage: number;
+  moviesLimit: number;
+  setMoviesPage: (page: number) => void;
+  isFetchingMovies: boolean;
+  refetchMovies: () => Promise<void>;
   createMovie: (draft: MovieDraft) => Promise<OldMovie>;
   updateMovie: (id: number, draft: MovieDraft) => Promise<OldMovie>;
   deleteMovie: (id: number) => Promise<void>;
@@ -65,6 +76,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const auth = useAuth();
   const loginMutation = useLogin();
   const logoutMutation = useLogout();
+  const [moviesPage, setMoviesPage] = useState(1);
+  const moviesLimit = MOVIES_PAGE_SIZE;
   const uuidToNumericRef = useRef<Map<string, number>>(new Map());
   const numericToUuidRef = useRef<Map<number, string>>(new Map());
   const nextNumericIdRef = useRef<number>(1);
@@ -103,21 +116,58 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!auth.isAuthenticated) {
       clearIdMappings();
+      setMoviesPage(1);
     }
-  }, [auth.isAuthenticated, clearIdMappings]);
+  }, [auth.isAuthenticated, clearIdMappings, setMoviesPage]);
 
   // Fetch movies only when authenticated
-  const { data: apiMovies = [], isLoading } = useMovies({
-    enabled: auth.isAuthenticated,
-  });
+  const moviesQuery = useMovies(
+    { page: moviesPage, limit: moviesLimit },
+    {
+      enabled: auth.isAuthenticated,
+    }
+  );
+  const { isLoading, isFetching: isFetchingMovies, refetch: refetchMoviesQuery } = moviesQuery;
+  const moviesResult = moviesQuery.data as PaginatedResponse<ApiMovie> | undefined;
+  const apiMovies: ApiMovie[] = moviesResult?.data ?? [];
+  const totalMovies = moviesResult?.total ?? 0;
+  const totalPages = useMemo(
+    () => Math.max(Math.ceil(totalMovies / moviesLimit), 1),
+    [totalMovies, moviesLimit]
+  );
+
+  useEffect(() => {
+    if (moviesPage > totalPages) {
+      setMoviesPage(totalPages);
+    }
+  }, [moviesPage, totalPages]);
+
+  const setMoviesPageSafe = useCallback(
+    (page: number) => {
+      setMoviesPage((prev) => {
+        const bounded = Math.max(1, Math.min(page, totalPages));
+        return bounded === prev ? prev : bounded;
+      });
+    },
+    [totalPages]
+  );
+
+  const movies: OldMovie[] = useMemo(
+    () =>
+      apiMovies.map((movie: ApiMovie) => {
+        const numId = getNumericId(movie.id);
+        return convertApiMovieToOld(movie, numId);
+      }),
+    [apiMovies, getNumericId]
+  );
+
   const createMovieMutation = useCreateMovieWithUpload();
   const updateMovieMutation = useUpdateMovie();
   const deleteMovieMutation = useDeleteMovie();
 
-  const movies = apiMovies.map((movie) => {
-    const numId = getNumericId(movie.id);
-    return convertApiMovieToOld(movie, numId);
-  });
+  const refetchMovies = useCallback(async () => {
+    await refetchMoviesQuery();
+  }, [refetchMoviesQuery]);
 
   const signIn = async (
     credentials: SignInCredentials
@@ -168,6 +218,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
       auth.setUser(null);
       clearIdMappings();
+      setMoviesPage(1);
 
       toast({
         title: t("auth.logout.title"),
@@ -207,6 +258,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
       const newMovie = await createMovieMutation.mutateAsync(data);
       const numericId = getNumericId(newMovie.id);
+      setMoviesPageSafe(1);
 
       toast({
         title: t("movies.toast.created.title"),
@@ -293,7 +345,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         throw new Error(t("movies.toast.notFound"));
       }
 
-      const movie = movies.find((m) => m.id === id);
+      const movie = movies.find((movieItem) => movieItem.id === id);
       const movieTitle = movie?.title || "Movie";
 
       await deleteMovieMutation.mutateAsync(uuid);
@@ -320,7 +372,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const getMovie = (id: number): OldMovie | undefined => {
-    return movies.find((movie) => movie.id === id);
+    return movies.find((movieItem) => movieItem.id === id);
   };
 
   const value: AppContextValue = {
@@ -328,6 +380,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
     signIn,
     signOut,
     movies,
+    moviesTotal: totalMovies,
+    moviesPage,
+    moviesLimit,
+    setMoviesPage: setMoviesPageSafe,
+    isFetchingMovies,
+    refetchMovies,
     createMovie,
     updateMovie,
     deleteMovie,
