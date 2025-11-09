@@ -15,7 +15,8 @@ import { toast } from "@/hooks/use-toast";
 const PAGE_SIZE = 8;
 
 export default function MoviesPage() {
-  const t = useTranslations("movies.list");
+  const tMovies = useTranslations("movies.list");
+  const tAuth = useTranslations("auth.logout");
   const [currentPage, setCurrentPage] = useState(1);
   const [hasShownWelcome, setHasShownWelcome] = useState(false);
   const { movies, isLoading } = useMovieList();
@@ -36,8 +37,8 @@ export default function MoviesPage() {
       const justLoggedIn = sessionStorage.getItem("justLoggedIn");
       if (justLoggedIn === "true") {
         toast({
-          title: t("welcomeBack"),
-          description: t("loggedInAs", { email: user.email }),
+          title: tMovies("welcomeBack"),
+          description: tMovies("loggedInAs", { email: user.email }),
           variant: "default",
         });
         sessionStorage.removeItem("justLoggedIn");
@@ -71,7 +72,7 @@ export default function MoviesPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <h1 className="text-4xl font-bold text-white leading-none">
-                {t("title")}
+              {tMovies("title")}
               </h1>
               <button
                 type="button"
@@ -86,7 +87,7 @@ export default function MoviesPage() {
               onClick={handleLogout}
               className="flex items-center gap-2 text-white transition font-medium hover:text-gray-200"
             >
-              {t("../logout.button")}
+              {tAuth("button")}
               <LogOut className="w-5 h-5" />
             </button>
           </div>
@@ -124,7 +125,7 @@ export default function MoviesPage() {
               disabled={!canGoPrev}
               className="text-white hover:text-gray-200 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {t("prev")}
+              {tMovies("prev")}
             </button>
             {Array.from({ length: totalPages }).map((_, index) => {
               const pageNumber = index + 1;
@@ -148,7 +149,7 @@ export default function MoviesPage() {
               disabled={!canGoNext}
               className="text-white hover:text-gray-200 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {t("next")}
+              {tMovies("next")}
             </button>
           </div>
         </div>
